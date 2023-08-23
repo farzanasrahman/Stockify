@@ -1,1 +1,3 @@
 # Stockify
+
+>Stockify is a cutting-edge web application that uses machine learning and deep learning techniques to provide stock traders with increased tools for making informed investing decisions. It allows for real-time stock price tracking, timely stock notifications, and sophisticated portfolio management tools. Stockify forecasts stock prices using deep learning, allowing traders to identify ideal purchasing periods and conduct trades based on demand-driven predictions. The tool also effortlessly retrieves real-time data, guaranteeing that traders are constantly equipped with the most up-to-date market knowledge to properly manage their investment strategy.
