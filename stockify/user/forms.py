@@ -5,15 +5,23 @@ from django.contrib.auth.models import User
 from .models import *
 
 class CreateUserForm(UserCreationForm):
+    """
+    Form for creating a new user.
+    """
     first_name = forms.CharField()
     last_name = forms.CharField()
     email = forms.CharField()
 
     class Meta:
         model = User
-        fields = ['first_name','last_name','username','email','password1','password2']
+        fields = ['first_name', 'last_name', 'username', 'email', 
+                  'password1', 'password2']
 
-class ProfileForm(forms.ModelForm):
+
+class ProfileForm(ModelForm):
+    """
+    Form for creating/editing a user profile.
+    """
     class Meta:
         model = Profile
-        fields =['address','phone_number','bio','balance','image']
+        fields = ['address', 'phone_number', 'bio', 'balance', 'image']
