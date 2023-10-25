@@ -1,6 +1,7 @@
 
 from django.shortcuts import render, redirect
-from .forms import CreateUserForm, ProfileForm, LoginForm
+from .forms import CreateUserForm, ProfileForm, LoginForm,UserUpdateForm,UpdateProfileForm
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
@@ -60,4 +61,44 @@ def login_page(request):
 
     context = {'form': form}
     return render(request, 'User/login.html', context)
+
+def logout_page(request):
+    """Log out the user and redirect to login page."""
+    logout(request)
+    return redirect('login')
+
+
+@login_required
+def profile(request):
+    """Render the user's profile page."""
+    return render(request, 'User/profile.html')
+
+
+@login_required
+def profile_update(request):
+    """
+    Update the user's profile.
+
+    Handles both the user's basic information as well as their profile picture.
+    """
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, 'Your account has been updated!')
+            return redirect('profile')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = UpdateProfileForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+
+    return render(request, 'User/profile_update.html', context)
 
