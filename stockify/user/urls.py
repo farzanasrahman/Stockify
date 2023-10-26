@@ -17,4 +17,5 @@ urlpatterns = [
     # Endpoint to log the user out
     path('profile_update/', views.profile_update, name='profile_update') 
     # Endpoint to update the user's profile
+    
 ]
