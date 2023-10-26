@@ -45,8 +45,8 @@ class LoginForm(AuthenticationForm):
         widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'class': 'form-control'})
     )
 
-    class UserUpdateForm(forms.ModelForm):
-        """
+class UserUpdateForm(forms.ModelForm):
+    """
         A form for updating user information.
 
         Inherits from Django's `ModelForm` and customizes the fields.
@@ -55,7 +55,7 @@ class LoginForm(AuthenticationForm):
         - `first_name`: A field for the user's first name.
         - `last_name`: A field for the user's last name.
         - `email`: A field for the user's email address.
-        """
+    """
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email']
