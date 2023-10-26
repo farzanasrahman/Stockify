@@ -10,3 +10,20 @@ import numpy as np
 from django.http import JsonResponse
 
 # Create your views here.
+
+def stock_fetch(request):
+    """
+    Fetch stock data and render it in a template.
+
+    :param request: The HTTP request object.
+    :return: Rendered template with stock data.
+    """
+    
+    nasdqs = StockList.objects.all()
+    tickers = [str(nasdq.symbol) for nasdq in nasdqs]
+    
+    data = utils.stock_fetch_api(tickers)
+
+    context = {'data': data}
+
+    return render(request, 'stock/stocktable.html', context)
