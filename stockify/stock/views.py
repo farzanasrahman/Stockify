@@ -73,3 +73,4 @@ def buy_stock(request):
     }
 
     return render(request, 'stock/buy_stock.html', context)
+
