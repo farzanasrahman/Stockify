@@ -74,3 +74,70 @@ def buy_stock(request):
 
     return render(request, 'stock/buy_stock.html', context)
 
+def predictions(request):
+    """
+    Renders the stock predictions based on user input.
+
+    This view function renders the stock predictions by:
+    1. Fetching the available stock tickers from the `StockList` model.
+    2. Accepting user input for stock symbol and date via POST request.
+    3. Utilizing a utility function to get stock predictions based on the input symbol and date.
+    4. Displaying the prediction, along with relevant information, on the rendered template.
+
+    Parameters:
+    -----------
+    request : HttpRequest
+        The Django request object.
+
+    Returns:
+    --------
+    HttpResponse
+        Rendered HTML page.
+
+    Template:
+    ---------
+    stock/predictions.html
+
+    Context Variables:
+    ------------------
+    - tickers: List of available stock symbols.
+    - chart: Chart representation of stock data.
+    - price: Predicted stock price.
+    - pred_date: Predicted date.
+    - stock_symbol: The symbol of the stock that's being predicted.
+
+    Raises:
+    -------
+    Warning
+        If no stocks are found with the given name.
+    """
+    context ={}
+    nasdqs = StockList.objects.all()
+    tickers =[]
+    for nasdq in nasdqs:
+        tickers.append(str(nasdq.symbol))
+    if request.method == 'POST':
+        stock_symbol = str(request.POST.get('symbol'))
+        date = str(request.POST.get('date'))
+        if not stock_symbol:
+            error_mesg = "No stocks found in this name!"
+            messages.warning(request,error_mesg)
+            return redirect('predictions')
+        valid,train,pred_price = utils.get_predictions(stock_symbol,date)
+        dates = utils.get_dates(date)
+        pred_price = np.array(pred_price)
+        pred_value = pred_price[0][0]
+        chart = utils.get_plot(valid,train)
+        predict_date = utils.pred_date(date)
+
+
+        context ={'chart':chart,
+                  'price':pred_value,
+                  'tickers':tickers,
+                  'pred_date':predict_date,
+                  'stock_symbol':stock_symbol}
+        return render(request,'stock/predictions.html',context)
+            
+
+    context ={'tickers':tickers}
+    return render(request,'stock/predictions.html',context)
