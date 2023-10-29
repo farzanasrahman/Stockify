@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Stockify</title>
+
+        <link rel="stylesheet" type="text/css" href="{% static 'User/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'User/css/custom.css' %}">
+        {% block csscontent %}
+        {% endblock %}
+    </head>
+
+    <body>
+        <header class="p-3 fixed-top bg-light border-bottom shadow-sm">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/"
+                        class="d-flex align-items-center mb-2 h4 me-3 mb-lg-0 link-body-emphasis text-decoration-none">
+                        Stockify
+                    </a>
+
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li><a href="{% url 'home' %}" class="nav-link px-2 link-body-emphasis">Home</a></li>
+                        <li><a href="{% url 'stock-list' %}" class="nav-link px-2 link-body-emphasis">Search Stock</a></li>
+                        <li><a href="{% url 'predictions' %}" class="nav-link px-2 link-body-emphasis">Predictions</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'buy-stock' %}" class="nav-link px-2 link-body-emphasis">Buy Stock</a></li>
+                        <li><a href="{% url 'sell-stock' %}" class="nav-link px-2 link-body-emphasis">Sell Stock</a></li>
+                        {% endif %}
+                    </ul>
+                    <ul class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0">
+                        {% if user.is_authenticated %} 
+                        <li><a href="{% url 'profile' %}" class="nav-link px-2 link-body-emphasis">Profile</a></li>
+                        <li><a href="{% url 'logout' %}" class="nav-link px-2 link-body-emphasis">Logout</a></li>
+                        {% else %}
+                        <li><a href="{% url 'login' %}" class="nav-link px-2 link-body-emphasis">Login</a></li>
+                        <li><a href="{% url 'register' %}" class="nav-link px-2 link-body-emphasis">Signup</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            {% block content %}
+            {% endblock %}
+
+        </main>
+        <footer class="bg-black py-5">
+            <div class="container">
+                <div class="text-center">
+                    <p class="text-white my-3">© All rights reserved. Made with by Stockify</p>
+                </div>
+            </div>
+        </footer>    
+    <script src='{% static "User/js/bootstrap.bundle.min.js" %}'></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {% block jscontent %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,20 @@
+body{
+    padding-top:70px;
+}
+
+.signup .form-group{
+    margin-bottom: 12px;
+}
+
+.hero-section{
+    background-image:url('../images/hero-bg.svg');
+    background-color: #0b0f19 !important;
+    padding: 150px 0;
+    height:100vh;
+    display: flex;
+    align-items: center;
+}
+
+.idea-section{
+    padding: 150px 0;
+}

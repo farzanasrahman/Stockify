@@ -1,0 +1,76 @@
+{% extends 'User/base.html' %}
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <h1 class="display-2 text-white fw-bolder my-3 py-3">
+                    Connecting <span class="text-gradient-primary">You</span> to the world of trading
+                </h1>
+                <a href="" class="btn btn-light btn-lg">Get Started</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="about-section my-5">
+    <div class="container py-5">
+        <div class="">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <h2 class="display-4 text-center text-dark fw-bolder my-3 py-3">
+                        About us
+                    </h2>
+                    <p class="h5 fw-light lh-lg">
+                        Welcome to Stockify, a leading platform for accurate and data-driven stock price predictions. We specialize in providing real-time insights and analysis to empower investors and traders in making informed financial decisions. Our stock price prediction methodology incorporates a comprehensive analysis of historical market data, fundamental factors, and machine learning algorithms. Our model harnesses the power to identify patterns and trends enabling us to generate accurate predictions. By leveraging our platform, you gain a competitive edge in the market. Our accurate predictions save you valuable time and effort, eliminating the need for extensive research and analysis. With our insights at your fingertips, you can confidently navigate the stock market, mitigate risks, and seize profitable opportunities. Join our community of smart investors and gain the confidence you need to succeed in the stock market.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="idea-section bg-light ">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <a href="{% url 'stock-list' %}" class="idea-item text-decoration-none">
+                    <div class="text-center">
+                        <img src="static/User/images/idea1.svg" width="48" alt="Bulb icon" class="d-block mb-4 mx-auto">
+                        <h4 class="mb-2 pb-1 text-dark text-decoration-none">Search Stock</h4>
+                        <p class="mx-auto text-dark text-decoration-none" style="max-width: 336px;">Discover, analyze, and stay informed with our powerful stock search tool. Uncover potential investment opportunities, track market trends, and make informed decisions</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-4">
+                    <div class="idea-item">
+                        <a href="{% url 'predictions' %}" class="idea-item text-decoration-none">
+                            <div class="text-center">
+                                <img src="static/User/images/idea2.svg" width="48" alt="Bulb icon" class="d-block mb-4 mx-auto">
+                                <h4 class="mb-2 pb-1 text-dark text-decoration-none">Predictions</h4>
+                                <p class="mx-auto text-dark text-decoration-none" style="max-width: 336px;">Unleash the power of machine learning to predict the future of the stock market. Gain valuable insights and make informed investment decisions. Harness the potential of data-driven predictions and unlock your path to financial success.</p>
+                            </div>
+                        </a>
+                    </div>
+            </div>
+            <div class="col-sm-4">
+                    <div class="idea-item">
+                        <a href="{% url 'buy-stock' %}" class="idea-item text-decoration-none">
+                            <div class="text-center">
+                                <img 
+                                src="static/User/images/idea3.svg" 
+                                width="48"
+                                alt="Bulb icon" 
+                                class="d-block mb-4 mx-auto"
+                                >
+                                <h4 class="mb-2 pb-1 text-dark text-decoration-none">Buy & Sell Stock</h4>
+                                <p class="mx-auto text-dark text-decoration-none" style="max-width: 336px;">Invest confidently. Buy, sell stocks effortlessly. Empower your financial future with our intuitive platform. Start now</p>
+                            </div>
+                        </a>
+                    </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
