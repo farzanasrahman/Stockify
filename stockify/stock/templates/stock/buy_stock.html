@@ -1,0 +1,144 @@
+{%  extends 'User/base.html' %}
+{% block content %}
+    
+    <section class="py-5 mb-5 bg-light">
+        <section class="intro">
+            <div class="container">
+                <div class="pt-5">
+                    <h2>Markets</h2>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="bg-white rounded p-3">
+                                <h5>Favourites</h4>
+                                    <ul class="row list-unstyled">
+                                        <li class="col-sm-6">AAPL</li>
+                                        <li class="col-sm-3">31020247</li>
+                                        <li class="col-sm-3">+3.2%</li>
+                                    </ul>
+                                    <ul class="row list-unstyled">
+                                        <li class="col-sm-6">AMZN</li>
+                                        <li class="col-sm-3">36891265</li>
+                                        <li class="col-sm-3">-7.26%</li>
+                                    </ul>
+                                    <ul class="row list-unstyled">
+                                        <li class="col-sm-6">MSFT</li>
+                                        <li class="col-sm-3">35034800</li>
+                                        <li class="col-sm-3">+7.2%</li>
+                                    </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="bg-white rounded p-3">
+                                <h5>Trending</h4>
+                                    <ul class="row list-unstyled">
+                                        <li class="col-sm-6">MSFT</li>
+                                        <li class="col-sm-3">35034800</li>
+                                        <li class="col-sm-3">+7.2%</li>
+                                    </ul>
+                                    <ul class="row list-unstyled">
+                                        <li class="col-sm-6">TSLA</li>
+                                        <li class="col-sm-3">82771500</li>
+                                        <li class="col-sm-3">+14.26%</li>
+                                    </ul>
+                                    <ul class="row list-unstyled">
+                                        <li class="col-sm-6">META</li>
+                                        <li class="col-sm-3">13521045</li>
+                                        <li class="col-sm-3">-2.1242%</li>
+                                    </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="bg-white rounded p-3">
+                                <h5>New Listing</h4>
+                                    <ul class="row list-unstyled">
+                                        <li class="col-sm-6">NVDA</li>
+                                        <li class="col-sm-3">34814996</li>
+                                        <li class="col-sm-3">-2.2%</li>
+                                    </ul>
+                                    <ul class="row list-unstyled">
+                                        <li class="col-sm-6">ORCL</li>
+                                        <li class="col-sm-3">10877201</li>
+                                        <li class="col-sm-3">-7.26%</li>
+                                    </ul>
+                                    <ul class="row list-unstyled">
+                                        <li class="col-sm-6">ASTR</li>
+                                        <li class="col-sm-3">1602519</li>
+                                        <li class="col-sm-3">-30.1242%</li>
+                                    </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section>
+        <div class="container my-5">
+            <h4>Buy Stock</h4>
+            <div class="border p-4 rounded shadow-sm">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="mb-2">Pay</label>
+                                <div class="row g-2">
+                                    <div class="col-sm-6">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="stock_name" name="stock_name">
+                                                <option selected="">Select Name</option>
+                                                {% for ticker in tickers %}
+                                                <option value="{{ticker}}">{{ticker}}</option>
+                                                {% endfor %}
+                                            </select>
+                                            <label for="floatingSelectGrid">Select a stock name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="amount" name="amount"
+                                                placeholder="1234" maxlength="2">
+                                            <label for="floatingInputGrid">Amount</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 text-center pt-4">
+                            <div class="mt-4">⟶</div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="pay" class="mb-2">Total Price</label>
+                                <div>
+                                    <strong id="total_price"
+                                        class="bg-light py-3 w-75 rounded border text-left px-3 d-inline-block"></strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 pt-4">
+                            <button type="submit" value ="submit" class="btn btn-dark mt-2 py-3 px-5 w-100">Buy</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </section>
+ 
+{% endblock %}
+
+{% block jscontent %}
+<script>
+
+var amount = document.getElementById('amount');
+var total_price = document.getElementById('total_price');
+var tickers = 334.12;
+amount.addEventListener('change', function (e) {
+    var amountValue = e.target.value;
+    total_price.innerHTML = (amountValue * tickers).toFixed(2);
+});
+
+</script>
+
+{% endblock %}
