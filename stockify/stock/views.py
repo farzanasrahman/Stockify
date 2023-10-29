@@ -141,3 +141,68 @@ def predictions(request):
 
     context ={'tickers':tickers}
     return render(request,'stock/predictions.html',context)
+
+def get_deposit_id(request):
+    """
+    Fetches and displays deposit IDs associated with the logged-in user.
+
+    This view function fetches deposit IDs linked with the currently authenticated user
+    from the `StockDeposit` model and displays them in the `stock/deposits.html` template.
+
+    Parameters:
+    -----------
+    request : HttpRequest
+        The Django request object.
+
+    Returns:
+    --------
+    HttpResponse
+        Rendered HTML page.
+
+    Template:
+    ---------
+    stock/deposits.html
+
+    Context Variables:
+    ------------------
+    - stock_id: List of deposit IDs associated with the current user.
+    """
+    stock_id = StockDeposit.objects.filter(user=request.user)
+    context = {'stock_id': stock_id}
+    return render(request, 'stock/deposits.html', context)
+
+
+def stock_list(request):
+    """
+    Computes the total price for a specified stock and amount.
+
+    This view function calculates the total price of a specified stock by:
+    1. Accepting user input for stock name and amount via POST request.
+    2. Fetching the unit price of the stock using a utility function.
+    3. Multiplying the unit price with the amount.
+    4. Returning the calculated total price in a JSON format.
+
+    Parameters:
+    -----------
+    request : HttpRequest
+        The Django request object.
+
+    Returns:
+    --------
+    JsonResponse
+        A JSON response containing the computed total price.
+
+    Context Variables (for JSON response):
+    --------------------------------------
+    - total_price: Computed total price of the stock for the given amount.
+    """
+    data = {}
+    if request.method == "POST":
+        stock_name = request.POST.get('stock_name')
+        amount = int(request.POST.get('amount'))
+        unitprice = utils.unit_price_fetch(stock_name)
+        total_price = unitprice * amount
+        data = {'total_price': total_price}
+        return JsonResponse(data)
+
+    return JsonResponse(data, safe=False)

@@ -1,0 +1,36 @@
+{% extends "User/base.html" %}
+
+{% block content %}
+  <section class="py-5">
+    <section class="intro">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4">
+            <div class="bg-light text-center p-5">         
+              <div class="media">
+                <div class="mb-3">
+                  <img class="rounded-circle account-img" style="width:150px;height:150px;" src="{{ user.profile.image.url}}">
+                </div>
+                <div class="media-body">
+                  <h2 class="account-heading">{{ user.username }}</h2>
+                  <p class="text-secondary">{{ user.email }}</p>
+                  <p class="text-secondary">{{ user.first_name }} {{user.last_name}}</p>
+                  <p class="text-secondary">{{ user.profile.address }}</p>
+                  <p class="text-secondary">{{ user.profile.phone_number }}</p>
+                  <p class="text-secondary">Balance: {{ user.profile.balance }}</p>
+
+                  <form action="{% url 'profile_update' %}" class="d-inline">
+                    <button class="btn btn-dark">Update Profile</button>
+                  </form>
+                  <form action="{% url 'deposits' %}" class="d-inline-block">
+                      <button class="btn btn-secondary">Deposits</button>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+{% endblock content %}

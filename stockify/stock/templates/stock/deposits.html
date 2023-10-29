@@ -1,0 +1,36 @@
+{% extends 'User/base.html' %}
+{% block content %}
+
+<div class="container my-5">
+    <nav class="navbar bg-body-tertiary mb-5">
+        <div class="container-fluid">
+            <a class="navbar-brand"> Deposit Listings</a>
+        </div>
+    </nav>
+    
+    <table class="table" id ="tables">
+        <thead>
+            <tr>
+                <th scope="col">Deposit ID</th>
+                <th scope="col">Stock Name</th>
+                <th scope="col">Amount</th> 
+                <th scope="col">Unit Price</th>
+                <th scope="col">Total Price</th>
+               
+        </thead>
+        <tbody>
+            {% for deposit in stock_id %}
+            <tr>
+                <th scope="row">{{deposit.id}}</th>
+                <td>{{deposit.stock_name}}</td>
+                    <td>{{deposit.amount}}</td>
+                    <td>{{deposit.unit_price}}</td>
+                    <td>{{deposit.total_price}}</td>
+            </tr>
+        </tbody>
+        {% endfor %} 
+    </table>
+   
+</div>
+</section>
+{% endblock %}
