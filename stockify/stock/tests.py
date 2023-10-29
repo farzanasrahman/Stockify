@@ -69,7 +69,6 @@ class StockFetchViewTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'TEST')  
-        # ... you can add more assertions here ...
 
 
 class SellStockTest(TestCase):
